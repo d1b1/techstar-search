@@ -25,6 +25,22 @@ const searchClient = algoliasearch(
   '66c53445092004ffa41e392ae2e2bab1'
 );
 
+function toTitleCase(str) {
+  return str.replace(
+    /\w\S*/g,
+    function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }
+  );
+}
+
+const transformItems = (items) => {
+  return items.map((item) => ({
+    ...item,
+    label: item.label.replace(/_/g, ' '),
+  }));
+};
+
 const future = { preserveSharedStateOnUnmount: true };
 
 export function App() {
@@ -54,13 +70,7 @@ export function App() {
                 <h4>
                   Accelerator:
                 </h4>
-                <RefinementList searchable="true" 
-                  attribute="accelerator" 
-                  showMore="true"
-                  showMoreLimit="30"
-                  searchablePlaceholder="Enter program..."
-                  limit="5"
-                />
+                <RefinementList searchable="true" attribute="accelerator" showMore="false"showMoreLimit="30" searchablePlaceholder="Enter program..." limit="5"/>
               </div>
 
               <div className="filter-el">
@@ -72,14 +82,17 @@ export function App() {
 
               <div className="filter-el">
                 <h4>
-                  City:
+                  HQ City:
                 </h4>
-                <RefinementList attribute="city" />
+                <RefinementList 
+                  searchable="true" 
+                  searchablePlaceholder="Enter a city..."
+                  attribute="city" />
               </div>
 
               <div className="filter-el">
                 <h4>
-                  Country:
+                  HQ Country:
                 </h4>
                 <RefinementList attribute="country" />
               </div>
@@ -88,7 +101,7 @@ export function App() {
                 <h4>
                   Program Status:
                 </h4>
-                <RefinementList attribute="program_status" />
+                <RefinementList attribute="program_status" transformItems={transformItems} />
               </div>
 
             </div>
