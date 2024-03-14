@@ -1,7 +1,9 @@
 {
-  "name": "instantsearch-app",
-  "version": "1.0.0",
-  "private": true,
+  "name": "Techstars-Search",
+  "version": "0.0.31",
+  "description": "Searchable index and UI of Techstars companies from across the world.",
+  "author": "Stephan Smith (Stephan.Smith.bc93@gmail.com) d1b1",
+  "private": false,
   "scripts": {
     "build": "parcel build index.html",
     "start": "parcel index.html",

@@ -1,5 +1,9 @@
 import React from 'react';
 import algoliasearch from 'algoliasearch/lite';
+import headerImage from './assets/logo.png';
+import fallbackImage from './assets/no-logo.png';
+import crunchbaseLogo from './assets/crunchbase.png';
+
 import {
   Configure,
   Highlight,
@@ -28,7 +32,8 @@ export function App() {
     <div>
       <header className="header">
         <h1 className="header-title">
-          <a href="/">Techstars Global Search</a>
+          <img src={headerImage} className="logo" />
+          <a href="/">Global Search</a>
         </h1>
         <p className="header-subtitle">
           Find by cohort, year, market and stage.
@@ -41,30 +46,62 @@ export function App() {
           indexName="techstars"
           future={future}
         >
-          <Configure hitsPerPage={8} />
+          <Configure hitsPerPage={10} />
           <div className="search-panel">
-            <div className="search-panel__filters">
-              <h4>
+            <div className="filters" >
+
+              <div className="filter-el">
+                <h4>
+                  Accelerator:
+                </h4>
+                <RefinementList searchable="true" 
+                  attribute="accelerator" 
+                  showMore="true"
+                  showMoreLimit="30"
+                  searchablePlaceholder="Enter program..."
+                  limit="5"
+                />
+              </div>
+
+              <div className="filter-el">
+                <h4>
                   Current Status:
-              </h4>
-              <RefinementList attribute="status" />
+                </h4>
+                <RefinementList attribute="status" />
+              </div>
 
-              <h4>
+              <div className="filter-el">
+                <h4>
                   City:
-              </h4>
-              <RefinementList attribute="city" />
+                </h4>
+                <RefinementList attribute="city" />
+              </div>
+
+              <div className="filter-el">
+                <h4>
+                  Country:
+                </h4>
+                <RefinementList attribute="country" />
+              </div>
+
+              <div className="filter-el">
+                <h4>
+                  Program Status:
+                </h4>
+                <RefinementList attribute="program_status" />
+              </div>
+
             </div>
-
-
-
             <div className="search-panel__results">
-              <SearchBox placeholder="Enter a name..." className="searchbox" />
+              <SearchBox placeholder="Enter a techstars company..." className="searchbox" />
+
               <Hits hitComponent={Hit} />
 
               <div className="pagination">
                 <Pagination />
               </div>
             </div>
+
           </div>
         </InstantSearch>
       </div>
@@ -76,20 +113,61 @@ type HitProps = {
   hit: Hit;
 };
 
+function ImageWithFallback({ src, alt, ...props }) {
+  const handleError = (e) => {
+    e.target.src = fallbackImage;
+  };
+
+  return <img src={src} alt={alt} onError={handleError} {...props} />;
+}
+
 function Hit({ hit }: HitProps) {
   return (
     <article>
-      <img src={hit.logo_url} alt={hit.name} />
-      <div>
+      <a href={hit['website']} target="_blank">
+        <ImageWithFallback src={hit.logo_url} alt={hit.name} />
+      </a>
+      <div className="element">
         <h1>
           <Highlight attribute="name" hit={hit} />
         </h1>
         <p>
-          <Highlight attribute="city" hit={hit} />
+          <Highlight attribute="description" hit={hit} />
         </p>
         <p>
-          <Highlight attribute="status" hit={hit} />
+          <b>HQ City:</b> <Highlight attribute="city" hit={hit} />,
+          <b>Status:</b> <Highlight attribute="status" hit={hit} />
         </p>
+        <p>
+            <b>Accelerator:</b> 
+            {hit['accelerator']}
+        </p>
+        <p>
+          <Highlight attribute="country" hit={hit} />
+        </p>
+        <p>
+          {hit['crunchbase_profile'] ?
+            <a href={`https://${hit['crunchbase_profile']}`} target="_blank">
+              <img src={crunchbaseLogo} className="crunch"/>
+            </a>
+            : null}
+        </p>
+      </div>
+      <div className="info">
+        <table>
+          {hit['founder_profile_arrays'].map((item, index) => (
+            <tr key={index}>
+              <td>
+                <a href={`https://${item[3]}`} target="_blank">
+                  <img src={item[2]} />
+                </a>
+              </td>
+              <td>
+                {item[0]} ({item[1]})
+              </td>
+            </tr>
+          ))}
+        </table>
       </div>
     </article>
   );

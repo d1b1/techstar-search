@@ -19,9 +19,32 @@ em {
   align-items: center;
   min-height: 50px;
   padding: 0.5rem 1rem;
-  background-image: linear-gradient(to right, #8e43e7, #00aeff);
+  background-color: #000;
   color: #fff;
   margin-bottom: 1rem;
+}
+
+.header .logo {
+  width: 140px;
+  margin-right: 20px;
+}
+
+.element {
+  width: 50%;
+  float: left;
+}
+
+.info {
+  position: relative;
+  width: 30%;
+  float: right;
+}
+
+.info img {
+  border-radius: 20px;
+  width: 40px;
+  padding: 0px;
+
 }
 
 .header a {
@@ -44,17 +67,32 @@ em {
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 1rem;
+}
+
+.crunch {
+  border-radius: 10px 10px 10px 10px;
+}
+
+.filter-el {
+  border: 1px solid #DFDFDF;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.filter-el h4 {
+  margin-top: 0px;
+  padding: 4px;
+  border-bottom: 1px solid #DFDFDF;
 }
 
 .search-panel {
   display: flex;
 }
 
-.search-panel__filters {
+.filters {
   flex: 1;
+  padding-right: 10px;
 }
 
 .search-panel__results {
@@ -72,6 +110,7 @@ em {
 
 .ais-Hits-item article {
   display: flex;
+  width: 100%;
 }
 
 .ais-Hits-item img {
