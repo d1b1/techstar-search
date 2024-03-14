@@ -108,6 +108,15 @@ em {
   text-align: center;
 }
 
+.ais-Hits-item { 
+  padding: 10px !important;
+  margin: 0px;
+}
+
+.ais-Hits-item:hover {
+  background-color: #DFDFDF !important;
+}
+
 .ais-Hits-item article {
   display: flex;
   width: 100%;

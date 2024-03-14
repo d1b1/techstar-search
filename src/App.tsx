@@ -125,7 +125,7 @@ function Hit({ hit }: HitProps) {
   return (
     <article>
       <a href={hit['website']} target="_blank">
-        <ImageWithFallback src={hit.logo_url} alt={hit.name} />
+        <ImageWithFallback src={hit.logo_url} width="80" alt={hit.name} />
       </a>
       <div className="element">
         <h1>
