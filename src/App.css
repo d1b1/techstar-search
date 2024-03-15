@@ -29,6 +29,12 @@ em {
   margin-right: 20px;
 }
 
+.header .gh-btn {
+  float: right;
+  position: absolute;
+  right: 20px;
+}
+
 .element {
   width: 50%;
   float: left;

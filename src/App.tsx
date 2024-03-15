@@ -3,6 +3,7 @@ import algoliasearch from 'algoliasearch/lite';
 import headerImage from './assets/logo.png';
 import fallbackImage from './assets/no-logo.png';
 import crunchbaseLogo from './assets/crunchbase.png';
+import GitHubButton from 'react-github-btn';
 
 import {
   Configure,
@@ -53,6 +54,9 @@ export function App() {
         <p className="header-subtitle">
           Find Companies by 'Program', 'year', 'status' or 'stage'.
         </p>
+        <div className="gh-btn">
+          <GitHubButton href="https://github.com/d1b1/techstar-search" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star d1b1/techstar-search on GitHub">Star</GitHubButton>
+        </div>
       </header>
 
       <div className="container">
@@ -69,7 +73,7 @@ export function App() {
                 <h4>
                   Accelerator:
                 </h4>
-                <RefinementList searchable="true" attribute="accelerator" showMore="false" showMoreLimit="30" searchablePlaceholder="Enter program..." limit="5" />
+                <RefinementList searchable="true" attribute="accelerator" searchablePlaceholder="Enter program..." limit="5" />
               </div>
 
               <div className="filter-el">
