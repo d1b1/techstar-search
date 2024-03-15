@@ -8,8 +8,8 @@ looking for network related help.
 - Find Founders who will provide feedback.
 - Find and understand the investment themes (overtime) by market.
 
-<img src="assets/screenshot-1.png" height="250">
-<img src="assets/screenshot-2.png" height="250">
+<img src="assets/screenshot-a.png" height="250">
+<img src="assets/screenshot-b.png" height="250">
 
 ### POC Tech Stack
 This POC uses Algolia Search, with their Reach InstantSearch SDK. 
