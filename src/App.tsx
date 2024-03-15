@@ -58,6 +58,7 @@ export function App() {
       <div className="container">
         <InstantSearch
           searchClient={searchClient}
+          routing="true"
           indexName="techstars"
           future={future}
         >
@@ -175,7 +176,8 @@ function Hit({ hit }: HitProps) {
               </td>
               <td>
                 {item[0]}
-                { item[1] ? `(${item[1]})` : null }
+                &nbsp;
+                { item[1] && item[1] !== 'UNKNOWN' ? `(${item[1]})` : null }
               </td>
             </tr>
           ))}
