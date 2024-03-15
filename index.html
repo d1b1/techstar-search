@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="shortcut icon" href="favicon.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/satellite-min.css"
-    />
-    <title>Techstars Portfolio Companies</title>
-  </head>
-  <body>
-    <noscript>You will need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <script type="module" src="src/index.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="shortcut icon" href="favicon.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/satellite-min.css" />
+  <meta name="theme-color" content="#317EFB" />
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Techstars Algolia Search UI POC for Networking Signals.">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CGYW035CZB"></script>
+  <script>
+    if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-CGYW035CZB');
+    } else {
+      console.log('GA is off.');
+    }
+  </script>
+  <title>Techstars Portfolio Companies (React/Agolia/Techstars)</title>
+</head>
+
+<body>
+  <noscript>You will need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <script type="module" src="src/index.tsx"></script>
+</body>
+
 </html>
