@@ -32,6 +32,8 @@ em {
 .element {
   width: 50%;
   float: left;
+  overflow: hidden !important;
+  overflow-clip-margin: unset !important;
 }
 
 .info {
@@ -41,11 +43,19 @@ em {
 }
 
 .info img {
-  border-radius: 20px;
+  border-radius: 20px !important;
   width: 40px;
   padding: 0px;
-  overflow-clip-margin: unset !important;
+}
 
+.avatar {
+  width: 40px;
+  border: 1px solid #DFDFDF;
+  padding: 2px !important;
+  overflow: hidden !important;
+  clip: auto !important;
+  clip-path: none !important;
+  border-radius: 30px !important;
 }
 
 .header a {
@@ -59,7 +69,6 @@ em {
 }
 
 .header-title::after {
-  content: ' ▸ ';
   padding: 0 0.5rem;
 }
 
@@ -72,7 +81,10 @@ em {
 }
 
 .crunch {
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px !important;
+  overflow: hidden !important;
+  clip: unset !important;
+  clip-path: unset !important;
 }
 
 .filter-el {
@@ -121,11 +133,13 @@ em {
 .ais-Hits-item article {
   display: flex;
   width: 100%;
+  overflow: hidden !important;
 }
 
 .ais-Hits-item img {
   max-height: 125px;
   padding-right: 16px;
+  overflow: hidden;
 }
 
 /* Modal.css */

@@ -28,7 +28,7 @@ const searchClient = algoliasearch(
 function toTitleCase(str) {
   return str.replace(
     /\w\S*/g,
-    function(txt) {
+    function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     }
   );
@@ -49,10 +49,9 @@ export function App() {
       <header className="header">
         <h1 className="header-title">
           <img src={headerImage} className="logo" />
-          <a href="/">Global Search</a>
         </h1>
         <p className="header-subtitle">
-          Find by cohort, year, market and stage.
+          Find Companies by 'Program', 'year', 'status' or 'stage'.
         </p>
       </header>
 
@@ -70,7 +69,7 @@ export function App() {
                 <h4>
                   Accelerator:
                 </h4>
-                <RefinementList searchable="true" attribute="accelerator" showMore="false"showMoreLimit="30" searchablePlaceholder="Enter program..." limit="5"/>
+                <RefinementList searchable="true" attribute="accelerator" showMore="false" showMoreLimit="30" searchablePlaceholder="Enter program..." limit="5" />
               </div>
 
               <div className="filter-el">
@@ -84,10 +83,7 @@ export function App() {
                 <h4>
                   HQ City:
                 </h4>
-                <RefinementList 
-                  searchable="true" 
-                  searchablePlaceholder="Enter a city..."
-                  attribute="city" />
+                <RefinementList searchable="true" searchablePlaceholder="Enter a city..." attribute="city" />
               </div>
 
               <div className="filter-el">
@@ -149,11 +145,13 @@ function Hit({ hit }: HitProps) {
         </p>
         <p>
           <b>HQ City:</b> <Highlight attribute="city" hit={hit} />,
-          <b>Status:</b> <Highlight attribute="status" hit={hit} />
+          <b>Status:</b> <Highlight attribute="status" hit={hit} />,
+          <b>Type:</b> {hit['type']},
+          <b>Stage:</b> {hit['stage']}
         </p>
         <p>
-            <b>Accelerator:</b> 
-            {hit['accelerator']}
+          <b>Accelerator:</b>
+          {hit['accelerator']}
         </p>
         <p>
           <Highlight attribute="country" hit={hit} />
@@ -161,7 +159,7 @@ function Hit({ hit }: HitProps) {
         <p>
           {hit['crunchbase_profile'] ?
             <a href={`https://${hit['crunchbase_profile']}`} target="_blank">
-              <img src={crunchbaseLogo} className="crunch"/>
+              <img src={crunchbaseLogo} className="crunch" />
             </a>
             : null}
         </p>
@@ -172,11 +170,12 @@ function Hit({ hit }: HitProps) {
             <tr key={index}>
               <td>
                 <a href={`https://${item[3]}`} target="_blank">
-                  <img src={item[2]} />
+                  <img src={item[2]} className="avatar" />
                 </a>
               </td>
               <td>
-                {item[0]} ({item[1]})
+                {item[0]}
+                { item[1] ? `(${item[1]})` : null }
               </td>
             </tr>
           ))}
