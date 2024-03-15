@@ -152,7 +152,7 @@ function Hit({ hit }: HitProps) {
         </p>
         <p>
           <b>Accelerator:</b>
-          {hit['accelerator']}
+          {hit['accelerator']} in {hit['session']}
         </p>
         <p>
           <Highlight attribute="country" hit={hit} />
