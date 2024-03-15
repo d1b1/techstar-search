@@ -58,7 +58,6 @@ export function App() {
       <div className="container">
         <InstantSearch
           searchClient={searchClient}
-          routing="true"
           indexName="techstars"
           future={future}
         >
