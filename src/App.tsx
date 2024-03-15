@@ -144,12 +144,12 @@ function Hit({ hit }: HitProps) {
           <Highlight attribute="description" hit={hit} />
         </p>
         <p>
-          <b>HQ City:</b> <Highlight attribute="city" hit={hit} />,
+          <b>HQ City:</b> <Highlight attribute="city" hit={hit} />, 
           <b>Status:</b> <Highlight attribute="status" hit={hit} />,
-          <b>Type:</b> {hit['type']},
+          <br />
+          <b>Type:</b> {hit['type']}, 
           <b>Stage:</b> {hit['stage']}
-        </p>
-        <p>
+          <br />
           <b>Accelerator:</b>
           {hit['accelerator']} in {hit['session']}
         </p>
