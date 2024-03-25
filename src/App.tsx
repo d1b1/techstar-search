@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import headerImage from './assets/logo.png';
 import fallbackImage from './assets/no-logo.png';
 import crunchbaseLogo from './assets/crunchbase.png';
 import GitHubButton from 'react-github-btn';
+import CustomModal from './Modal2';
 
 import {
   Configure,
@@ -22,8 +23,8 @@ import type { Hit } from 'instantsearch.js';
 import './App.css';
 
 const searchClient = algoliasearch(
-  'XQL63TD3C7',
-  '66c53445092004ffa41e392ae2e2bab1'
+  'UD1VE6KV0J',
+  '1b3aa8792d6de4c1dde62071448d8a6d'
 );
 
 function toTitleCase(str) {
@@ -45,6 +46,12 @@ const transformItems = (items) => {
 const future = { preserveSharedStateOnUnmount: true };
 
 export function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <div>
       <header className="header">
@@ -60,20 +67,35 @@ export function App() {
       </header>
 
       <div className="container">
+
+        <CustomModal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          content={<p>Modal Content</p>}
+        />
+
         <InstantSearch
           searchClient={searchClient}
-          indexName="techstars"
+          indexName="Techstars"
           future={future}
         >
           <Configure hitsPerPage={10} />
+
           <div className="search-panel">
             <div className="filters" >
 
               <div className="filter-el">
                 <h4>
-                  Accelerator:
+                  Program City:
                 </h4>
                 <RefinementList searchable="true" attribute="accelerator" searchablePlaceholder="Enter program..." limit="5" />
+              </div>
+
+              <div className="filter-el">
+                <h4>
+                  Program Year:
+                </h4>
+                <RefinementList sortFacetValuesBy="alpha" attribute="sessionYear" />
               </div>
 
               <div className="filter-el">
@@ -108,7 +130,7 @@ export function App() {
             <div className="search-panel__results">
               <SearchBox placeholder="Enter a techstars company..." className="searchbox" />
 
-              <Hits hitComponent={Hit} />
+              <Hits hitComponent={Hit} onOpenModal={handleOpenModal}/>
 
               <div className="pagination">
                 <Pagination />
@@ -134,7 +156,14 @@ function ImageWithFallback({ src, alt, ...props }) {
   return <img src={src} alt={alt} onError={handleError} {...props} />;
 }
 
-function Hit({ hit }: HitProps) {
+const YearsBetween = ({ year }) => {
+  const currentYear = new Date().getFullYear();
+  const yearsBetween = currentYear - year;
+
+  return <span>{yearsBetween} years</span>;
+};
+
+function Hit({ hit }: HitProps, onOpenModal) {
   return (
     <article>
       <a href={hit['website']} target="_blank">
@@ -148,12 +177,13 @@ function Hit({ hit }: HitProps) {
           <Highlight attribute="description" hit={hit} />
         </p>
         <p>
+        
           <b>HQ City:</b> <Highlight attribute="city" hit={hit} />, 
           <b>Status:</b> <Highlight attribute="status" hit={hit} />,
           <br />
           <b>Type:</b> {hit['type']}, 
-          <b>Stage:</b> {hit['stage']}
-          <br />
+          <b>Stage:</b> {hit['stage']}<br/>
+          <b>Age: </b> <YearsBetween year={hit.sessionYear} /><br />
           <b>Accelerator:</b>
           {hit['accelerator']} in {hit['session']}
         </p>
@@ -185,6 +215,11 @@ function Hit({ hit }: HitProps) {
             </tr>
           ))}
         </table>
+
+        <button onClick={onOpenModal}>
+          Open Modal
+        </button>;
+
       </div>
     </article>
   );
