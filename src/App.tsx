@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import headerImage from './assets/logo.png';
 import fallbackImage from './assets/no-logo.png';
+import fallbackAvatarImage from './assets/missing-avatar.jpeg';
 import crunchbaseLogo from './assets/crunchbase.png';
 import GitHubButton from 'react-github-btn';
 import CustomModal from './Modal2';
@@ -148,12 +149,20 @@ type HitProps = {
   hit: Hit;
 };
 
-function ImageWithFallback({ src, alt, ...props }) {
+function ImageWithFallback({ src, alt, classname, ...props }) {
   const handleError = (e) => {
     e.target.src = fallbackImage;
   };
 
-  return <img src={src} alt={alt} onError={handleError} {...props} />;
+  return <img src={src} className={classname} alt={alt} onError={handleError} {...props} />;
+}
+
+function AvatarWithFallback({ src, alt, classname, ...props }) {
+  const handleError = (e) => {
+    e.target.src = fallbackAvatarImage;
+  };
+
+  return <img src={src || ''} width="80" className={classname} onError={handleError} {...props} />;
 }
 
 const YearsBetween = ({ year }) => {
@@ -167,7 +176,7 @@ function Hit({ hit }: HitProps, onOpenModal) {
   return (
     <article>
       <a href={hit['website']} target="_blank">
-        <ImageWithFallback src={hit.logo_url} width="80" alt={hit.name} />
+        <ImageWithFallback src={hit.logo_url} width="80" className="compLogo" alt={hit.name} />
       </a>
       <div className="element">
         <h1>
@@ -179,13 +188,11 @@ function Hit({ hit }: HitProps, onOpenModal) {
         <p>
         
           <b>HQ City:</b> <Highlight attribute="city" hit={hit} />, 
-          <b>Status:</b> <Highlight attribute="status" hit={hit} />,
-          <br />
+          <b>Status:</b> <Highlight attribute="status" hit={hit} />,<br />
           <b>Type:</b> {hit['type']}, 
           <b>Stage:</b> {hit['stage']}<br/>
-          <b>Age: </b> <YearsBetween year={hit.sessionYear} /><br />
-          <b>Accelerator:</b>
-          {hit['accelerator']} in {hit['session']}
+          <b>Age:</b> <YearsBetween year={hit.sessionYear} /><br />
+          <b>Accelerator:</b> {hit['accelerator']} in {hit['session']}
         </p>
         <p>
           <Highlight attribute="country" hit={hit} />
@@ -204,7 +211,7 @@ function Hit({ hit }: HitProps, onOpenModal) {
             <tr key={index}>
               <td>
                 <a href={`https://${item[3]}`} target="_blank">
-                  <img src={item[2]} className="avatar" />
+                  <AvatarWithFallback src={item[2]} width="80" alt={item[0]} className="avatar" />
                 </a>
               </td>
               <td>
