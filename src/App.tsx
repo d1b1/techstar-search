@@ -216,9 +216,10 @@ function Hit({ hit }: HitProps, onOpenModal) {
           ))}
         </table>
 
-        <button onClick={onOpenModal}>
+
+        {/* <button onClick={onOpenModal}>
           Open Modal
-        </button>;
+        </button> */}
 
       </div>
     </article>
