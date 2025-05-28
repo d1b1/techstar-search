@@ -5,7 +5,7 @@
   "author": "Stephan Smith (Stephan.Smith.bc93@gmail.com) d1b1",
   "private": false,
   "scripts": {
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --dist-dir docs",
     "start": "parcel index.html",
     "watch": "parcel serve index.html"
   },
