@@ -26,3 +26,5 @@ npm start
 ```
 
 <img src="assets/screenshot-b.png" height="100">
+
+Hosted on github pages.
